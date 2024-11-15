@@ -223,3 +223,18 @@
             ],
           },
       ];
+
+      const prizeMoney = [
+        { id: 1, amount: 2000},
+        { id: 2, amount: 4000},
+        { id: 3, amount: 6000},
+        { id: 4, amount: 8000},
+        { id: 5, amount: 10000},
+        { id: 6, amount: 12000},
+        { id: 7, amount: 14000},
+        { id: 8, amount: 16000},
+        { id: 9, amount: 18000},
+        { id: 10, amount: 20000},
+      ].reverse();
+
+      export {data, prizeMoney};

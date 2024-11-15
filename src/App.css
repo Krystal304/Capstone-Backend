@@ -19,6 +19,33 @@
   align-items: center;
   justify-content: center;
 
+}
 
+.answer {
+  width: 40%;
+  text-align: center;
+  border: 1px solid #3e3e3e;
+  border-radius: 15px;
+  padding: 5px;
+  margin: 10px;
+  cursor: pointer;
+}
 
+.answer:hover {
+  background-color: #3e3e3e;
+}
+
+.question {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.answers {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
