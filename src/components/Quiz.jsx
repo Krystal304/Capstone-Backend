@@ -12,6 +12,7 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
   const [question, setQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [className, setClassName] = useState("answer");
+  const [answerStatus, setAnswerStatus] = useState('');
 
 
   const backgroundAudio = new Audio(background);
@@ -23,9 +24,9 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
     setQuestion(data[questionNumber - 1]);
   }, [data, questionNumber]);
 
-  // useEffect(() => {
-  //   backgroundAudio.play();
-  // })
+  useEffect(() => {
+    backgroundAudio.play();
+  }, [])
   const delay = (duration, callback) => {
     setTimeout(() => {
       callback();
@@ -59,10 +60,11 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
   // };
 
   const handleCLick = (a) => {
+    if (selectedAnswer) return;
     setSelectedAnswer(a);
-    setClassName('answer active');
+    setClassName('active');
     delay(3000, () => {
-      setClassName(a.correct ? 'answer correct' : 'answer wrong');
+      setClassName(a.correct ? 'answer correct' : 'wrong');
     });
     delay(5000, () => {
       if (a.correct) {
@@ -87,9 +89,10 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
       <div className="answers">
         {question?.answers.map((item) => (
           <div
-            className={selectedAnswer === item ? className : "answer"}
-            onClick={() => !selectedAnswer && handleCLick(item)}
-            key={item.text}
+          key={item.text}
+            className={selectedAnswer?.text === item.text ? `answer ${answerStatus}`: "answer"} 
+            onClick={() => handleCLick(item)}
+         
            
           >
             {item.text}
