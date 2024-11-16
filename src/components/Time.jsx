@@ -1,9 +1,27 @@
-import React from 'react'
 
-function Time() {
-  return (
-    <div>Time</div>
-  )
-}
+import { useState, useEffect } from "react";
 
-export default Time
+const Timer = ({ setTimeOut, questionNumber }) => {
+  const [time, setTime] = useState(20);
+
+  useEffect(() => {
+    if (time === 0) {
+      setTimeOut(true);
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setTime((prevTime) => prevTime - 1);
+    }, 1000);
+
+    return () => clearInterval(interval); // Clean up on unmount or question change
+  }, [time, setTimeOut]);
+
+  useEffect(() => {
+    setTime(20); // Reset the timer whenever the questionNumber changes
+  }, [questionNumber]);
+
+  return <div className="timer">{time}</div>;
+};
+
+export default Timer;

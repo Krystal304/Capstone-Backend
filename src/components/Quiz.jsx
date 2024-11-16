@@ -1,22 +1,31 @@
 import { set } from "mongoose";
 import { useState, useEffect } from "react";
-import useSound from "use-sound";
+
 import correct from "../sounds/correct.mp3";
 import wrong from "../sounds/wrong.mp3";
-import background from "../sounds/background.mp3";
+import background from '../sounds/background.wav'
+
 
 
 
 function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
   const [question, setQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [correctAnswer, setCorrectAnswer] = useState(null);
   const [className, setClassName] = useState("answer");
+
+
+  const backgroundAudio = new Audio(background);
+  const correctAudio = new Audio(correct);
+  const wrongAudio = new Audio(wrong);
+
 
   useEffect(() => {
     setQuestion(data[questionNumber - 1]);
   }, [data, questionNumber]);
 
+  // useEffect(() => {
+  //   backgroundAudio.play();
+  // })
   const delay = (duration, callback) => {
     setTimeout(() => {
       callback();
@@ -34,12 +43,14 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
   
     setTimeout(() => {
       if (item.correct) {
+        correctAudio.play();
         setTimeout(() => {
           setQuestionNumber((prev) => prev + 1); 
           setSelectedAnswer(null); 
           setClassName("answer"); 
         }, 1000); 
       } else {
+        wrongAudio.play();
         setTimeout(() => {
           setTimeOut(true);
         }, 1000); 

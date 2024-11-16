@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { data, prizeMoney } from './data/data'
 import Quiz from './components/Quiz'
+import Time from './components/Time'
 
 
 import './App.css'
@@ -19,6 +20,7 @@ function App() {
         />
       </div>
       <div className="timer">Timer</div>
+      <Time />
       <div className="pyramid">
         <div className="money">
           <div className="money-list">
