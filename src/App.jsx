@@ -20,6 +20,8 @@ function App() {
       </div>
       <div className="timer">Timer</div>
       <div className="pyramid">
+        <div className="money">
+          <div className="money-list">
         <ul>
           {prizeMoney.map((item) => (
             <li
@@ -32,6 +34,8 @@ function App() {
         </ul>
       </div>
     </div>
+  </div>
+</div>
   );
 }
 

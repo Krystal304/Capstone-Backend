@@ -80,3 +80,29 @@
   align-items: center;
   justify-content: space-around;
 }
+
+.money {
+  background-color: #020230;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.money-list {
+  padding: 20px;
+  list-style: none;
+  width: 100%;
+}
+.amount {
+  font-size: 30px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.item {
+
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  width: auto;
+}
