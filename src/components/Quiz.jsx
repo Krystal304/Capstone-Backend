@@ -32,31 +32,55 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
     }, duration);
   };
   
-  const handleCLick = (item) => {
-    setSelectedAnswer(item);
-    setClassName("answer active");
+  // const handleCLick = (a) => {
+  //   setSelectedAnswer(a);
+  //   setClassName("answer active");
     
-    setTimeout(() => {
-      setClassName(item.correct ? "answer correct" : "answer wrong");
-    }, 3000);
+  //   setTimeout(() => {
+  //     setClassName(item.correct ? "answer correct" : "answer wrong");
+  //   }, 3000);
 
   
-    setTimeout(() => {
-      if (item.correct) {
+  //   setTimeout(() => {
+  //     if (item.correct) {
+  //       correctAudio.play();
+  //       setTimeout(() => {
+  //         setQuestionNumber((prev) => prev + 1); 
+  //         setSelectedAnswer(null); 
+  //         setClassName("answer"); 
+  //       }, 1000); 
+  //     } else {
+  //       wrongAudio.play();
+  //       setTimeout(() => {
+  //         setTimeOut(true);
+  //       }, 1000); 
+  //     }
+  //   }, 5000);
+  // };
+
+  const handleCLick = (a) => {
+    setSelectedAnswer(a);
+    setClassName('answer active');
+    delay(3000, () => {
+      setClassName(a.correct ? 'answer correct' : 'answer wrong');
+    });
+    delay(5000, () => {
+      if (a.correct) {
         correctAudio.play();
-        setTimeout(() => {
-          setQuestionNumber((prev) => prev + 1); 
-          setSelectedAnswer(null); 
-          setClassName("answer"); 
-        }, 1000); 
+        delay(1000, () => {
+          setQuestionNumber(prev => prev + 1);
+          setSelectedAnswer(null);
+          setClassName('answer');
+        });
       } else {
         wrongAudio.play();
-        setTimeout(() => {
+        delay(1000, () => {
           setTimeOut(true);
-        }, 1000); 
+        });
       }
-    }, 5000);
-  };
+    });
+
+  }
   return (
     <div className="quiz">
       <div className="question">{question?.question}</div>
