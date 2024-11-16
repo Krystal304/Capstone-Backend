@@ -1,5 +1,10 @@
 import { set } from "mongoose";
 import { useState, useEffect } from "react";
+import useSound from "use-sound";
+import correct from "../sounds/correct.mp3";
+import wrong from "../sounds/wrong.mp3";
+import background from "../sounds/background.mp3";
+
 
 
 function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
@@ -22,30 +27,25 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
     setSelectedAnswer(item);
     setClassName("answer active");
     
-    // setTimeout(() => {
-    //   setClassName(item.correct ? "answer correct" : "answer wrong");
-    //   setCorrectAnswer(item);
-    //   setTimeOut(true);
-    // }, 3000);
-    delay (3000, () => {
+    setTimeout(() => {
       setClassName(item.correct ? "answer correct" : "answer wrong");
-    })
+    }, 3000);
 
-  delay(5000, () => {
-    if (item.correct) {
-      delay(1000, () => {
-        setQuestionNumber((prev) => prev + 1);
-        setSelectedAnswer(null);
-        setClassName("answer");
-      });
-    } else {
-      delay(1000, () => {
-        setTimeOut(true);
-      });
-    }
-      })
-  }
-
+  
+    setTimeout(() => {
+      if (item.correct) {
+        setTimeout(() => {
+          setQuestionNumber((prev) => prev + 1); 
+          setSelectedAnswer(null); 
+          setClassName("answer"); 
+        }, 1000); 
+      } else {
+        setTimeout(() => {
+          setTimeOut(true);
+        }, 1000); 
+      }
+    }, 5000);
+  };
   return (
     <div className="quiz">
       <div className="question">{question?.question}</div>
