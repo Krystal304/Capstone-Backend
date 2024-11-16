@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 const Timer = ({ setTimeOut, questionNumber }) => {
-  const [time, setTime] = useState(20);
+  const [time, setTime] = useState(30);
 
   useEffect(() => {
     if (time === 0) {
@@ -18,7 +18,7 @@ const Timer = ({ setTimeOut, questionNumber }) => {
   }, [time, setTimeOut]);
 
   useEffect(() => {
-    setTime(20); // Reset the timer whenever the questionNumber changes
+    setTime(30); // Reset the timer whenever the questionNumber changes
   }, [questionNumber]);
 
   return <div className="timer">{time}</div>;

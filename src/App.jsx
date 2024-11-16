@@ -19,8 +19,11 @@ function App() {
           setTimeOut={setTimeOut}
         />
       </div>
-      <div className="timer">Timer</div>
-      <Time />
+      <div className="timer">Timer:</div>
+      <Time 
+      setTimeOut={setTimeOut}
+      questionNumber={questionNumber}
+      />
       <div className="pyramid">
         <div className="money">
           <div className="money-list">
