@@ -8,6 +8,7 @@ import background from '../sounds/background.wav'
 
 
 
+
 function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
   const [question, setQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -15,17 +16,19 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
   const [answerStatus, setAnswerStatus] = useState('');
 
 
-  const backgroundAudio = new Audio(background);
+
   const correctAudio = new Audio(correct);
   const wrongAudio = new Audio(wrong);
 
 
   useEffect(() => {
+  
     setQuestion(data[questionNumber - 1]);
   }, [data, questionNumber]);
 
   useEffect(() => {
-    backgroundAudio.play();
+    const backgroundAudio = new Audio(background);
+    // backgroundAudio.play();
   }, [])
   const delay = (duration, callback) => {
     setTimeout(() => {
@@ -59,15 +62,17 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
   //   }, 5000);
   // };
 
-  const handleCLick = (a) => {
+  const handleClick = (item) => {
     if (selectedAnswer) return;
-    setSelectedAnswer(a);
+
+    console.log(item)
+    setSelectedAnswer(item);
     setClassName('active');
-    delay(3000, () => {
-      setClassName(a.correct ? 'answer correct' : 'wrong');
+    delay(1000, () => {
+      setClassName(item.correct ? 'correct' : 'wrong');
     });
     delay(5000, () => {
-      if (a.correct) {
+      if (item.correct) {
         correctAudio.play();
         delay(1000, () => {
           setQuestionNumber(prev => prev + 1);
@@ -83,15 +88,21 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
     });
 
   }
+
+  function handleClickAnswer(e) {
+    
+    console.log(e.target.value)
+  }
   return (
     <div className="quiz">
       <div className="question">{question?.question}</div>
+
       <div className="answers">
         {question?.answers.map((item) => (
           <div
           key={item.text}
-            className={selectedAnswer?.text === item.text ? `answer ${answerStatus}`: "answer"} 
-            onClick={() => handleCLick(item)}
+            className ={className+(selectedAnswer?.text === item.text ? `answer ${answerStatus}`: "answer")} 
+            onClick={() => handleClick(item)}
          
            
           >

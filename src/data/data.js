@@ -230,11 +230,25 @@
         { id: 3, amount: 6000},
         { id: 4, amount: 8000},
         { id: 5, amount: 10000},
-        { id: 6, amount: 12000},
-        { id: 7, amount: 14000},
-        { id: 8, amount: 16000},
-        { id: 9, amount: 18000},
-        { id: 10, amount: 20000},
-      ].reverse();
+        { id: 6, amount: 15000},
+        { id: 7, amount: 20000},
+        { id: 8, amount: 25000},
+        { id: 9, amount: 30000},
+        { id: 10, amount: 35000},
+        { id: 11, amount: 40000},
+        { id: 12, amount: 45000},
+        { id: 13, amount: 50000},
+        { id: 14, amount: 55000},
+        { id: 15, amount: 60000},
+        { id: 16, amount: 65000},
+        { id: 17, amount: 70000},
+        { id: 18, amount: 75000},
+        { id: 19, amount: 80000},
+        { id: 20, amount: 85000},
+      ].reverse().map((item => ({
+        ...item,
+        amount: `$${item.amount.toLocaleString()}`
+      })));
+    
 
       export {data, prizeMoney};
