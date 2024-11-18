@@ -1,34 +1,30 @@
 import { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { data, prizeMoney } from '../data/data';
-import Quiz from '../components/Quiz';
-import Time from '../components/Time';
 import Start from '../components/Start';
 import Trivia from './Trivia';
-
-import '../App.css';
+import Final from './Final';
+import Leaderboard from './Leaderboard';
 
 function Home() {
- 
   const [userName, setUserName] = useState(null);
-  
-  const [gameStarted, setGameStarted] = useState(false);
+  const nav = useNavigate(); 
 
-  // Function to handle game start
+
   const startGame = (name) => {
-    setUserName(name);
-    setGameStarted(true);
+    setUserName(name); 
+    nav('/trivia'); 
   };
 
   return (
     <div className="app">
-      {!gameStarted ? (
-        <Start onStart={startGame} /> 
-      ) : (
-        <>
-        <Trivia userName={userName}/>
-         
-        </>
-      )}
+ 
+      <Routes>
+        <Route path="/" element={<Start onStart={startGame} />} />
+        <Route path="/trivia" element={<Trivia userName={userName} />} />
+        <Route path="/final" element={<Final />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+      </Routes>
     </div>
   );
 }

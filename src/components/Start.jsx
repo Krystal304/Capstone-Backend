@@ -13,46 +13,20 @@ const Start = ({ onStart }) => {
   };
 
   return (
-    <div
-      style={{
-        margin: "auto",
-        width: "50%",
-        border: "3px solid green",
-        padding: "10px",
-        textAlign: "center",
-      }}
-    >
+    <div style={{ margin: "auto", width: "50%", padding: "10px", textAlign: "center" }}>
       <input
         type="text"
         placeholder="Enter your name"
         ref={inputRef}
         className="form-control"
-        style={{
-          padding: "10px",
-          fontSize: "16px",
-          marginBottom: "20px",
-          width: "80%",
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-        }}
+        style={{ padding: "10px", fontSize: "16px", marginBottom: "20px", width: "80%" }}
       />
       <h1>Welcome!</h1>
-      <button
-        onClick={handleStart}
-        style={{
-          padding: "10px 20px",
-          fontSize: "16px",
-          backgroundColor: "green",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
+      <button onClick={handleStart} style={{ padding: "10px 20px", fontSize: "16px", backgroundColor: "green", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>
         Start Game
       </button>
     </div>
   );
-}
+};
 
 export default Start;
