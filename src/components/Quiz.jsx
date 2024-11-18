@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import correct from "../sounds/correct.mp3";
 import wrong from "../sounds/wrong.mp3";
 
-function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
+function Quiz({ data, 
+  questionNumber, 
+  setQuestionNumber, 
+  setTimeOut, 
+  onCorrectAnswer }) {
   const [question, setQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [className, setClassName] = useState("answer");
@@ -22,6 +26,7 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
 
     setTimeout(() => {
       if (selectedAnswer.correct) {
+        onCorrectAnswer();
      
         setQuestionNumber((prev) => prev + 1);
       } else {

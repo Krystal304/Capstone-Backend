@@ -93,7 +93,7 @@
 }
 
 .money-list {
-  padding: 20px;
+  padding: 10px;
   list-style: none;
   width: 100%;
 }
@@ -132,4 +132,11 @@
 
 answer.wrong {
   background-color: red;
+}
+
+
+.item.active {
+  background-color: green;  
+  color: white;
+  font-weight: bold;
 }

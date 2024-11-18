@@ -10,6 +10,23 @@ function Trivia({userName}) {
   
     const [questionNumber, setQuestionNumber] = useState(1);
     const [timeOut, setTimeOut] = useState(false);
+    const [correctAnswers, setCorrectAnswers] = useState(0);
+
+    const handleCorrectAnswer = () => {
+      setCorrectAnswers((prev) => prev + 1);
+    };
+
+
+
+
+    if (timeOut) {
+      
+      return (
+        <div>
+          <h1 style={{ textAlign: 'center', color: 'red' }}>Game Over! Better luck next time, { userName }!</h1>
+        </div>
+      );
+    }
   return (
     <>
     <div className="main">
@@ -21,6 +38,7 @@ function Trivia({userName}) {
       questionNumber={questionNumber}
       setQuestionNumber={setQuestionNumber}
       setTimeOut={setTimeOut}
+      onCorrectAnswer={handleCorrectAnswer}
     />
   </div>
   <div className="timer">
@@ -28,7 +46,9 @@ function Trivia({userName}) {
     
 
   </div>
-  <Money questionNumber={questionNumber} />
+  <Money 
+  questionNumber={questionNumber}
+  correctAnswers={correctAnswers} />
   
   </>
   )
