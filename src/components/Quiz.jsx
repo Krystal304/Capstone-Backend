@@ -36,46 +36,17 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
     }, duration);
   };
   
-  // const handleCLick = (a) => {
-  //   setSelectedAnswer(a);
-  //   setClassName("answer active");
-    
-  //   setTimeout(() => {
-  //     setClassName(item.correct ? "answer correct" : "answer wrong");
-  //   }, 3000);
 
-  
-  //   setTimeout(() => {
-  //     if (item.correct) {
-  //       correctAudio.play();
-  //       setTimeout(() => {
-  //         setQuestionNumber((prev) => prev + 1); 
-  //         setSelectedAnswer(null); 
-  //         setClassName("answer"); 
-  //       }, 1000); 
-  //     } else {
-  //       wrongAudio.play();
-  //       setTimeout(() => {
-  //         setTimeOut(true);
-  //       }, 1000); 
-  //     }
-  //   }, 5000);
-  // };
 
-  const handleClick = (item) => {
-    if (selectedAnswer) return;
+  const handleSubmit = () => {
+    if (!selectedAnswer) return;
 
-    console.log(item)
-    setSelectedAnswer(item);
-    setClassName('active');
-    delay(1000, () => {
-      setClassName(item.correct ? 'correct' : 'wrong');
-    });
+    setClassName(selectedAnswer.correct ? 'correct' : 'wrong');
     delay(5000, () => {
-      if (item.correct) {
+      if (selectedAnswer.correct) {
         correctAudio.play();
         delay(1000, () => {
-          setQuestionNumber(prev => prev + 1);
+          setQuestionNumber((prev) => prev + 1);
           setSelectedAnswer(null);
           setClassName('answer');
         });
@@ -86,9 +57,8 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
         });
       }
     });
-
-  }
-
+  };
+   
   function handleClickAnswer(e) {
     
     console.log(e.target.value)
@@ -97,20 +67,30 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
     <div className="quiz">
       <div className="question">{question?.question}</div>
 
-      <div className="answers">
+      <form className="answers">
         {question?.answers.map((item) => (
-          <div
-          key={item.text}
-            className ={className+(selectedAnswer?.text === item.text ? `answer ${answerStatus}`: "answer")} 
-            onClick={() => handleClick(item)}
-         
-           
-          >
+          <label key={item.text} className="answer">
+            <input
+              type="radio"
+              name='answer'
+              value={item.text}
+              onChange={()=>setSelectedAnswer(item)}
+              checked={selectedAnswer?.text === item}
+            />
             {item.text}
-          </div>
+            </label>
+
         ))}
+        </form>
+        <button
+              type="button"
+            onClick={handleSubmit}
+          disabled={!selectedAnswer} 
+      >
+         Submit Answer
+          </button>
       </div>
-    </div>
+    // </div>
   );
 }
 

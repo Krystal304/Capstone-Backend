@@ -27,7 +27,7 @@
           question: "What was the name of the planned invasion of Japan towards the end of World War II?",
           answers: [
             {
-              text: "Operatin Downfall",
+              text: "Operation Downfall",
               correct: true,
             },
             {
