@@ -1,15 +1,11 @@
-import { set } from "mongoose";
 import { useState, useEffect } from "react";
-
 import correct from "../sounds/correct.mp3";
 import wrong from "../sounds/wrong.mp3";
-import background from "../sounds/background.wav";
 
 function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
   const [question, setQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [className, setClassName] = useState("answer");
-  const [answerStatus, setAnswerStatus] = useState("");
 
   const correctAudio = new Audio(correct);
   const wrongAudio = new Audio(wrong);
@@ -18,33 +14,24 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
     setQuestion(data[questionNumber - 1]);
   }, [data, questionNumber]);
 
-  useEffect(() => {
-    const backgroundAudio = new Audio(background);
-    // backgroundAudio.play();
-  }, []);
-  const delay = (duration, callback) => {
-    setTimeout(() => {
-      callback();
-    }, duration);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!selectedAnswer) return;
-
-    console.log("Selected answer: ", selectedAnswer);
+    if (!selectedAnswer) return;  
 
     setClassName(selectedAnswer.correct ? "correct" : "wrong");
 
     setTimeout(() => {
       if (selectedAnswer.correct) {
+     
         setQuestionNumber((prev) => prev + 1);
       } else {
+      
         setTimeOut(true);
       }
+     
       setSelectedAnswer(null);
       setClassName("answer");
-    }, 2000);
+    }, 2000); 
   };
 
   return (
@@ -58,22 +45,23 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut }) {
               type="radio"
               name="answer"
               value={item.text}
-              onChange={() => {
-                setSelectedAnswer(item);
-                console.log("Answer selected: ", item);
-              }}
-              checked={selectedAnswer?.text === item.text}
+              onChange={() => setSelectedAnswer(item)}  
+              checked={selectedAnswer?.text === item.text}  
             />
             {item.text}
           </label>
         ))}
       </form>
-      <p>Selected answer: {selectedAnswer ? selectedAnswer.text : "None"}</p>
-      <button type="button" 
-      onClick={handleSubmit} 
-      disabled={!selectedAnswer}>
+      <button
+        type="button"
+        onClick={handleSubmit}
+        disabled={!selectedAnswer}  
+      >
         Submit Answer
       </button>
+
+   
+      {selectedAnswer && <div className="selected-answer">You selected: {selectedAnswer.text}</div>}
     </div>
   );
 }

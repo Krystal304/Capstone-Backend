@@ -1,27 +1,36 @@
 
+import { set } from "mongoose";
 import { useState, useEffect } from "react";
 
-const Timer = ({ setTimeOut, questionNumber }) => {
+const Time = ({ setTimeOut, questionNumber }) => {
   const [time, setTime] = useState(30);
+  const [timerActive, setTimerActive] = useState(false);
+
+
+  useEffect(() => {
+
+    setTime(30); 
+    setTimerActive(true);
+  }, [questionNumber]); 
+
 
   useEffect(() => {
     if (time === 0) {
-      setTimeOut(true);
+      setTimeOut(true); 
+      setTimerActive(false);
       return;
     }
 
-    const interval = setInterval(() => {
-      setTime((prevTime) => prevTime - 1);
-    }, 1000);
+    if (timerActive) {
+      const interval = setInterval(() => {
+        setTime((prevTime) => prevTime - 1); 
+      }, 1000);
 
-    return () => clearInterval(interval); // Clean up on unmount or question change
-  }, [time, setTimeOut]);
-
-  useEffect(() => {
-    setTime(30); // Reset the timer whenever the questionNumber changes
-  }, [questionNumber]);
+    return () => clearInterval(interval); 
+    }
+  }, [time, setTimeOut, timerActive]); 
 
   return <div className="timer">{time}</div>;
 };
 
-export default Timer;
+export default Time;

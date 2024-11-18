@@ -28,7 +28,7 @@ function Trivia({userName}) {
     
 
   </div>
-  <Money questionNumber={questionNumber}/>
+  <Money questionNumber={questionNumber} />
   
   </>
   )
