@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Time from "../components/Time";
 import Quiz from "../components/Quiz";
 import { data } from "../data/data";
-import { useState } from "react";
 import Money from "../components/Money";
 import { useNavigate } from "react-router-dom";
 
@@ -11,18 +10,22 @@ function Trivia({ userName }) {
   const [timeOut, setTimeOut] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const nav = useNavigate();
+
   const handleCorrectAnswer = () => {
     setCorrectAnswers((prev) => prev + 1);
   };
 
-  if (timeOut) {
-    nav("/final", { state: { userName, correctAnswers } });
-  }
+  // Navigate to "final" page when timeOut is true
+  useEffect(() => {
+    if (timeOut) {
+      nav("/final", { state: { userName, correctAnswers } });
+    }
+  }, [timeOut, nav, userName, correctAnswers]);
 
   return (
     <>
       <div className="main">
-        <h1 style={{ textAlign: 'center', color: 'purple' }}>
+        <h1 style={{ textAlign: "center", color: "purple" }}>
           Good luck, {userName}!
         </h1>
         <Quiz
@@ -36,7 +39,7 @@ function Trivia({ userName }) {
       <div className="timer">
         <Time setTimeOut={setTimeOut} questionNumber={questionNumber} />
       </div>
-      <Money correctAnswers={correctAnswers} />
+      <Money questionNumber={questionNumber} correctAnswers={correctAnswers} />
     </>
   );
 }
