@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import correct from "../sounds/correct.mp3";
 import wrong from "../sounds/wrong.mp3";
+import { useRef } from "react";
 
 function Quiz({ data, 
   questionNumber, 
@@ -11,8 +12,9 @@ function Quiz({ data,
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [className, setClassName] = useState("answer");
 
-  const correctAudio = new Audio(correct);
-  const wrongAudio = new Audio(wrong);
+//handle audio
+const correctAudioRef = useRef(new Audio(correct));
+const wrongAudioRef = useRef(new Audio(wrong));
 
   useEffect(() => {
     setQuestion(data[questionNumber - 1]);
@@ -22,30 +24,29 @@ function Quiz({ data,
     e.preventDefault();
     if (!selectedAnswer) return;  
 
-    setClassName(selectedAnswer.correct ? "correct" : "wrong");
+    const isCorrect = selectedAnswer.correct;
+    setClassName(isCorrect ? "answer correct" : "answer wrong");
 
     setTimeout(() => {
-      if (selectedAnswer.correct) {
+      if (isCorrect) {
+        correctAudioRef.current.play(); 
         onCorrectAnswer();
-     
         setQuestionNumber((prev) => prev + 1);
       } else {
-      
+        wrongAudioRef.current.play(); 
         setTimeOut(true);
       }
-     
       setSelectedAnswer(null);
       setClassName("answer");
-    }, 2000); 
+    }, 2000);
   };
-
   return (
     <div className="quiz">
       <div className="question">{question?.question}</div>
 
       <form className="answers">
         {question?.answers.map((item) => (
-          <label key={item.text} className="answer">
+          <label key={item.text} className={`answer ${className}`}>
             <input
               type="radio"
               name="answer"

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 function Trivia({ userName }) {
+
   const [questionNumber, setQuestionNumber] = useState(1);
   const [timeOut, setTimeOut] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
