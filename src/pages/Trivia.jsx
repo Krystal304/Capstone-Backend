@@ -4,18 +4,20 @@ import Quiz from "../components/Quiz";
 import { data } from "../data/data";
 import Money from "../components/Money";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function Trivia({ userName }) {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [timeOut, setTimeOut] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
+  const location = useLocation();
   const nav = useNavigate();
 
   const handleCorrectAnswer = () => {
     setCorrectAnswers((prev) => prev + 1);
   };
 
-  // Navigate to "final" page when timeOut is true
+
   useEffect(() => {
     if (timeOut) {
       nav("/final", { state: { userName, correctAnswers } });
