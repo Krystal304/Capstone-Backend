@@ -9,8 +9,6 @@ import Leaderboard from './Leaderboard';
 function Home() {
   const [userName, setUserName] = useState(null);
   const nav = useNavigate(); 
-  
-  console.log('home')
 
 
   const startGame = (name) => {

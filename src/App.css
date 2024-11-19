@@ -31,7 +31,7 @@
 }
 
 
-.answer {
+/* .answer {
   /* width: 40%;
   padding: 10px;
   margin: 0 10px 20px 10px;
@@ -46,8 +46,8 @@
   align-items: center;
   margin-bottom: 10px;
   cursor: pointer; */
-
-}
+/* 
+} */ */
 
 .answer input[type="radio"] {
   margin-right: 10px;
@@ -159,7 +159,7 @@
 }
 
 
-.leaderboard {
+/* .leaderboard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -223,6 +223,117 @@
   cursor: pointer;
 }
 
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+} */
+
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #020230;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  height: 100vh;
+  overflow: auto;
+}
+
+.leaderboard h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.leaderboard-tables {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.leaderboard-table {
+  width: 100%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.leaderboard-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 12px;
+  text-align: center;
+}
+
+.leaderboard-table th {
+  background-color: #333;
+  color: white;
+  text-transform: uppercase;
+}
+
+.leaderboard-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.leaderboard-table tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.leaderboard-table .highlight {
+  background-color: #ffd700; 
+  color: black;
+}
+
+.leaderboard-table tr:nth-child(2) .highlight {
+  background-color: #c0c0c0; 
+}
+
+.leaderboard-table tr:nth-child(3) .highlight {
+  background-color: #cd7f32; 
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
 
 button {
   padding: 10px 20px;
