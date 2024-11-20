@@ -1,12 +1,15 @@
 import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Start = ({ onStart }) => {
   const inputRef = useRef();
+  const nav = useNavigate();
 
   const handleStart = () => {
     const name = inputRef.current.value;
     if (name.trim()) {
       onStart(name);
+      nav("/trivia");
     } else {
       alert("Please enter your name.");
     }

@@ -10,25 +10,22 @@ const Time = ({ setTimeOut, questionNumber }) => {
   useEffect(() => {
 
     setTime(30); 
-    setTimerActive(true);
+    // setTimerActive(true);
   }, [questionNumber]); 
 
 
   useEffect(() => {
     if (time === 0) {
       setTimeOut(true); 
-      setTimerActive(false);
+      // setTimerActive(false);
       return;
     }
+    const interval = setInterval(() => {
+      setTime((prevTime) => prevTime - 1); // Decrease time every second
+    }, 1000);
 
-    if (timerActive) {
-      const interval = setInterval(() => {
-        setTime((prevTime) => prevTime - 1); 
-      }, 1000);
-
-    return () => clearInterval(interval); 
-    }
-  }, [time, setTimeOut, timerActive]); 
+    return () => clearInterval(interval); // Clear interval when component unmounts
+  }, [time, setTimeOut]);
 
   return <div className="timer">{time}</div>;
 };

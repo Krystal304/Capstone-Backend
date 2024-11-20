@@ -57,23 +57,57 @@ function App() {
       });
   }, []);
 
-  return (
+//   return (
+//     <div className="App">
+//       <h1>Trivia Questions</h1>
+//       {error && <p style={{ color: "red" }}>{error}</p>} 
+//       <ul>
+//         {questions.map((question, index) => (
+//           <li key={index}>
+//             <strong>Q:</strong> {question.question} <br />
+//             <em>Answer:</em> {question.correct_answer}
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+return (
+  <Router>
     <div className="App">
       <h1>Trivia Questions</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>} 
-      <ul>
-        {questions.map((question, index) => (
-          <li key={index}>
-            <strong>Q:</strong> {question.question} <br />
-            <em>Answer:</em> {question.correct_answer}
-          </li>
-        ))}
-      </ul>
+      {/* Define routes for different components */}
+      <Routes>
+        {/* Home route, shows when the user starts the app */}
+        <Route path="/" element={<Home />} />
+        
+        {/* Trivia route */}
+        <Route 
+          path="/trivia" 
+          element={
+            <div>
+              {error && <p style={{ color: "red" }}>{error}</p>}
+              <ul>
+                {questions.map((question, index) => (
+                  <li key={index}>
+                    <strong>Q:</strong> {question.question} <br />
+                    <em>Answer:</em> {question.correct_answer}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          }
+        />
+      </Routes>
     </div>
-  );
+  </Router>
+);
 }
 
 export default App;
+
+// export default App;
 
 
 

@@ -87,28 +87,28 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut, onCorrectAn
   const wrongAudioRef = useRef(new Audio(wrong));
 
   useEffect(() => {
-    setQuestion(data[questionNumber - 1]); // Update the question when the question number changes
+    setQuestion(data[questionNumber - 1]); 
   }, [data, questionNumber]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!selectedAnswer) return;
 
-    const isCorrect = selectedAnswer.correct; // Check if the selected answer is correct
+    const isCorrect = selectedAnswer.correct; 
     setClassName(isCorrect ? "answer correct" : "answer wrong");
 
     setTimeout(() => {
       if (isCorrect) {
-        correctAudioRef.current.play();  // Play correct sound
-        onCorrectAnswer();  // Increase correct answers
-        setQuestionNumber((prev) => prev + 1);  // Move to the next question
+        correctAudioRef.current.play();  
+        onCorrectAnswer();  
+        setQuestionNumber((prev) => prev + 1);  
       } else {
-        wrongAudioRef.current.play();  // Play wrong sound
-        setTimeOut(true);  // Set timeout for the player
+        wrongAudioRef.current.play();  
+        setTimeOut(true);  
       }
-      setSelectedAnswer(null);  // Reset selected answer
-      setClassName("answer");  // Reset answer style
-    }, 2000); // Delay to show the correct/wrong styling before advancing
+      setSelectedAnswer(null); 
+      setClassName("answer");  
+    }, 2000); 
   };
 
   return (
@@ -122,8 +122,8 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut, onCorrectAn
               type="radio"
               name="answer"
               value={item.text}
-              onChange={() => setSelectedAnswer(item)} // Set the selected answer
-              checked={selectedAnswer?.text === item.text}  // Check if the current answer is selected
+              onChange={() => setSelectedAnswer(item)} 
+              checked={selectedAnswer?.text === item.text}  
             />
             {item.text}
           </label>

@@ -68,7 +68,7 @@ function Trivia({ userName }) {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get("http://localhost:3000/");
-        console.log(response.data);
+        // console.log(response.data);
         setQuestions(response.data);  
       } catch (error) {
         console.error("Error fetching questions:", error);
@@ -81,6 +81,7 @@ function Trivia({ userName }) {
   const handleCorrectAnswer = () => {
     setCorrectAnswers((prev) => prev + 1);
   };
+  setQuestionNumber((prev) => prev + 1);
 
   useEffect(() => {
     if (timeOut) {
@@ -89,11 +90,15 @@ function Trivia({ userName }) {
   }, [timeOut, nav, userName, correctAnswers]);
 
   return (
-    <>
+    <div className="App">
+      <h1 style={{ textAlign: "center", color: "purple" }}>
+        Good luck, {userName}!
+      </h1>
+      
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
       <div className="main">
-        <h1 style={{ textAlign: "center", color: "purple" }}>
-          Good luck, {userName}!
-        </h1>
         {questions.length > 0 ? (
           <Quiz
             data={questions}  
@@ -106,13 +111,14 @@ function Trivia({ userName }) {
           <div>Loading Questions...</div>  
         )}
       </div>
+
       <div className="timer">
         <Time setTimeOut={setTimeOut} questionNumber={questionNumber} />
       </div>
+
       <Money correctAnswers={correctAnswers} />
-    </>
+    </div>
   );
 }
 
 export default Trivia;
-
