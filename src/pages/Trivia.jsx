@@ -64,24 +64,24 @@ function Trivia({ userName }) {
   const nav = useNavigate();
 
 
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/");
-        // console.log(response.data);
-        setQuestions(response.data);  
-      } catch (error) {
-        console.error("Error fetching questions:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchQuestions = async () => {
+  //     try {
+  //       const response = await fetchQuestions();
+  //       // console.log(response.data);
+  //       setQuestions(response.data);  
+  //     } catch (error) {
+  //       console.error("Error fetching questions:", error);
+  //     }
+  //   };
 
-    fetchQuestions();
-  }, []);  
+  //   getQuestions();
+  // }, []);  
 
   const handleCorrectAnswer = () => {
     setCorrectAnswers((prev) => prev + 1);
   };
-  setQuestionNumber((prev) => prev + 1);
+  // setQuestionNumber((prev) => prev + 1);
 
   useEffect(() => {
     if (timeOut) {
@@ -96,7 +96,7 @@ function Trivia({ userName }) {
       </h1>
       
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
 
       <div className="main">
         {questions.length > 0 ? (

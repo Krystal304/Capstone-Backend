@@ -9,19 +9,6 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 
-// function App() {
-//   return (
-//    <Router>
-
-//     <Home />
-    
-
-//   </Router>
-//   )
-// }
-
-
-
 function App() {
   const [questions, setQuestions] = useState([]); 
   const [error, setError] = useState(null); 
@@ -29,7 +16,7 @@ function App() {
 
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/questions");
+      const response = await axios.get("http://localhost:3000/");
       setQuestions(response.data); 
     } catch (err) {
       console.error("Error fetching questions:", err);
@@ -38,24 +25,24 @@ function App() {
   };
 
 
-  // useEffect(() => {
-  //   fetchQuestions();
-  // }, []);
-
   useEffect(() => {
- 
-    axios.get("http://localhost:3000/")
-      .then(response => {
+    fetchQuestions();
+  }, []);
 
-        console.log(response.data);
+  // useEffect(() => {
+ 
+  //   axios.get("http://localhost:3000/")
+  //     .then(response => {
+
+  //       console.log(response.data);
   
 
-        setQuestions(response.data); 
-      })
-      .catch((error) => {
-        console.error("Error fetching questions:", error);
-      });
-  }, []);
+  //       setQuestions(response.data); 
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching questions:", error);
+  //     });
+  // }, []);
 
 //   return (
 //     <div className="App">
@@ -86,19 +73,13 @@ return (
         <Route 
           path="/trivia" 
           element={
-            <div>
-              {error && <p style={{ color: "red" }}>{error}</p>}
-              <ul>
-                {questions.map((question, index) => (
-                  <li key={index}>
-                    <strong>Q:</strong> {question.question} <br />
-                    <em>Answer:</em> {question.correct_answer}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <Trivia />
+        
           }
+          
         />
+        <Route path="/final" element={<Final />} />
+
       </Routes>
     </div>
   </Router>
