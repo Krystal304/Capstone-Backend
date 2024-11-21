@@ -8,6 +8,9 @@ import Money from "../components/Money";
 import { useNavigate } from "react-router-dom";
 import { fetchQuestions } from "../api";
 import QuestionForm from "../components/QuestionForm";
+import { prizeMoney } from "../data/data";
+
+
 
 
 function Trivia({ userName }) {
@@ -42,6 +45,7 @@ function Trivia({ userName }) {
   return (
     <div className="App">
       <h1>Good luck!</h1>
+      <Money correctAnswers={correctAnswers} /> 
       {questions.length > 0 ? (
         <Quiz
           data={questions}
