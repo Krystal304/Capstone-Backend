@@ -41,6 +41,9 @@ function Trivia({ userName }) {
       nav("/final", { state: { userName, correctAnswers } });
     }
   }, [timeOut, nav, userName, correctAnswers]);
+  
+
+
 
   return (
     <div className="App">

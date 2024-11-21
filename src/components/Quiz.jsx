@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import correct from "../sounds/correct.mp3";
 import wrong from "../sounds/wrong.mp3";
+import Time from "./Time";
 
 function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut, onCorrectAnswer }) {
   const [question, setQuestion] = useState(null);

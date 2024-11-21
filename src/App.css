@@ -251,7 +251,7 @@ button:hover {
   background-color: #0056b3;
 } */
 
-/* Reset and Global Styles */
+Reset and Global Styles
 * {
   margin: 0;
   padding: 0;
@@ -259,41 +259,42 @@ button:hover {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #020230;
+  font-family: "Roboto", sans-serif;
+  /* background-color: #020230; */
   color: white;
   overflow-x: hidden;
+  background: url("./images/bg.jpg");
 }
 
-/* Main App Container */
 .app {
-  height: 100vh;
+  height: 110vh;
   display: flex;
   color: white;
   background-color: #020230;
-  flex-direction: row; /* Align items horizontally */
-  justify-content: space-between; /* Spread items to both sides */
+  font-family: "Roboto", sans-serif;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Main Section (Quiz Area) */
 .main {
-  width: 75%; /* Main content (quiz) takes 75% of the screen */
-  background: url('./images/bg.jpg');
+  width: 75%;
+  background: url("./images/bg.jpg") center;
   display: flex;
   flex-direction: column;
   background-size: cover;
   padding: 20px;
+  height: 100%;
 }
 
-/* Pyramid (Money List) */
 .pyramid {
-  width: 25%; /* Money pyramid takes 25% of the screen */
+  width: 25%;
   background-color: #020230;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  position: srelative;
+  top: 0;
 }
 
 /* Answer Section */
@@ -320,10 +321,10 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+ 
 }
 
-/* Quiz Layout */
+
 .quiz {
   height: 100%;
   display: flex;
@@ -332,18 +333,18 @@ body {
   justify-content: space-around;
 }
 
-/* Money Section Styling */
+
 .money {
   background-color: #020230;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 100%;
   height: 100%;
 }
 
 .money-list {
-  max-height: 90%; /* Allow scrolling if the list is too long */
+  max-height: 90%;
   overflow-y: auto;
   padding: 10px;
   list-style: none;
@@ -373,6 +374,7 @@ body {
   border-radius: 5px;
   width: auto;
   text-align: center;
+  cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
@@ -386,7 +388,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Timer */
+
 .timer {
   display: flex;
   justify-content: center;
@@ -403,7 +405,18 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Correct / Wrong Answer Styles */
+.answer {
+  width: 40%;
+  padding: 10px;
+  margin: 0 10px 20px 10px;
+  text-align: center;
+  background: linear-gradient(#0e0124, #22074d);
+  border: 1px solid white;
+  border-radius: 65px;
+  font-weight: 300;
+  font-size: 20px;
+  cursor: pointer;
+}
 .answer.correct {
   background-color: green;
 }
@@ -412,7 +425,7 @@ body {
   background-color: red;
 }
 
-/* Leaderboard Section */
+
 .leaderboard {
   display: flex;
   flex-direction: column;
@@ -420,7 +433,7 @@ body {
   padding: 20px;
   background-color: #020230;
   color: white;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   height: 100vh;
   overflow: auto;
 }
@@ -488,7 +501,7 @@ body {
   background-color: #cd7f32;
 }
 
-/* Pagination Styles */
+
 .pagination {
   margin-top: 20px;
   display: flex;
@@ -510,7 +523,7 @@ body {
   background-color: #0056b3;
 }
 
-/* General Button Styles */
+
 button {
   padding: 10px 20px;
   font-size: 16px;
