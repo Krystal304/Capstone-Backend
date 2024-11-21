@@ -7,6 +7,8 @@ import Quiz from "../components/Quiz";
 import Money from "../components/Money";
 import { useNavigate } from "react-router-dom";
 import { fetchQuestions } from "../api";
+import QuestionForm from "../components/QuestionForm";
+
 
 function Trivia({ userName }) {
   const [questionNumber, setQuestionNumber] = useState(1);
@@ -39,34 +41,22 @@ function Trivia({ userName }) {
 
   return (
     <div className="App">
-      <h1 style={{ textAlign: "center", color: "purple" }}>
-        Good luck, {userName}!
-      </h1>
-      
-
-
-
-      <div className="main">
-        {questions.length > 0 ? (
-          <Quiz
-            data={questions}  
-            questionNumber={questionNumber}
-            setQuestionNumber={setQuestionNumber}
-            setTimeOut={setTimeOut}
-            onCorrectAnswer={handleCorrectAnswer}
-          />
-        ) : (
-          <div>Loading Questions...</div>  
-        )}
-      </div>
-
-      <div className="timer">
-        <Time setTimeOut={setTimeOut} questionNumber={questionNumber} />
-      </div>
-
-      <Money correctAnswers={correctAnswers} />
+      <h1>Good luck!</h1>
+      {questions.length > 0 ? (
+        <Quiz
+          data={questions}
+          questionNumber={questionNumber}
+          setQuestionNumber={setQuestionNumber}
+          setTimeOut={setTimeOut}
+          onCorrectAnswer={handleCorrectAnswer}
+        />
+      ) : (
+        <div>Loading Questions...</div>
+      )}
     </div>
   );
 }
 
 export default Trivia;
+
+ 

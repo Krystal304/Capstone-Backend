@@ -5,6 +5,7 @@ import Start from '../components/Start';
 import Trivia from './Trivia';
 import Final from './Final';
 import Leaderboard from './Leaderboard';
+import QuestionForm from '../components/QuestionForm';
 
 function Home() {
   const [userName, setUserName] = useState(null);
@@ -24,6 +25,7 @@ function Home() {
         <Route path="/trivia" element={<Trivia userName={userName} />} />
         <Route path="/final" element={<Final />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/add-questions" element={<QuestionForm />} />
       </Routes>
     </div>
   );
