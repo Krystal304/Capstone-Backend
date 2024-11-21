@@ -8,7 +8,7 @@ function QuestionForm({ onQuestionAdded }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Check for empty question or answers
+
     if (!questionText.trim()) {
       alert("Question text is required!");
       return;
@@ -19,7 +19,7 @@ function QuestionForm({ onQuestionAdded }) {
       return;
     }
   
-    // Proceed with submission
+
     const newQuestion = { question: questionText, answers };
     try {
       const response = await axios.post("http://localhost:3000/", newQuestion);
@@ -27,8 +27,8 @@ function QuestionForm({ onQuestionAdded }) {
       if (onQuestionAdded) {
         onQuestionAdded(response.data);
       }
-      setQuestionText(""); // Reset question
-      setAnswers([{ text: "", correct: false }]); // Reset answers
+      setQuestionText(""); 
+      setAnswers([{ text: "", correct: false }]); 
       alert("Question added successfully!");
     } catch (err) {
       console.error("Error adding question:", err);

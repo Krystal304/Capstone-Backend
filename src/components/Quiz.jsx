@@ -10,6 +10,7 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut, onCorrectAn
   const [question, setQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);  
+  const [className, setClassName] = useState("answer");
 
   const correctAudioRef = useRef(new Audio(correct));
   const wrongAudioRef = useRef(new Audio(wrong));
