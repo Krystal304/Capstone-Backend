@@ -7,7 +7,7 @@ function QuestionPage() {
   const [questions, setQuestions] = useState([]);
   const [editingQuestion, setEditingQuestion] = useState(null);
 
-  // Fetch questions when the page loads
+
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -21,12 +21,11 @@ function QuestionPage() {
     fetchQuestions();
   }, []);
 
-  // Handle adding a question
+
   const handleQuestionAdded = (newQuestion) => {
     setQuestions((prev) => [...prev, newQuestion]);
   };
 
-  // Handle updating a question
   const handleQuestionUpdated = (updatedQuestion) => {
     setQuestions((prev) =>
       prev.map((q) => (q._id === updatedQuestion._id ? updatedQuestion : q))
