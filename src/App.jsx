@@ -31,59 +31,22 @@ function App() {
   useEffect(() => {
     fetchQuestions();
   }, []);
-  // useEffect(() => {
-
-  //   axios.get("http://localhost:3000/")
-  //     .then(response => {
-
-  //       console.log(response.data);
-
-  //       setQuestions(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching questions:", error);
-  //     });
-  // }, []);
-
-  //   return (
-  //     <div className="App">
-  //       <h1>Trivia Questions</h1>
-  //       {error && <p style={{ color: "red" }}>{error}</p>}
-  //       <ul>
-  //         {questions.map((question, index) => (
-  //           <li key={index}>
-  //             <strong>Q:</strong> {question.question} <br />
-  //             <em>Answer:</em> {question.correct_answer}
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     </div>
-  //   );
-  // }
 
   return (
-    <div>
-      <nav>
-        <Link to="/add-question">Add a New Question</Link>
-      </nav>
+    <div className="App">
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <Routes>
 
-      <div className="App">
-        <h1>Trivia Questions</h1>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <Routes>
-          <Route path="*" element={<Home />} />
-          <Route
-            path="/trivia"
-            element={<Trivia questions={questions} onQuestionAdded={handleQuestionAdded} />}
-          />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/final" element={<Final />} />
-          <Route
-            path="/add-question"
-            element={<QuestionForm onQuestionAdded={handleQuestionAdded} />}
-          />
-        </Routes>
-      </div>
+        <Route
+          path="*"
+          element={
+            <Home
+              questions={questions}
+              onQuestionAdded={handleQuestionAdded}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }
