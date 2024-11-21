@@ -1,40 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function QuestionForm({ onQuestionAdded }) {
+function QuestionForm({ onQuestionAdded, onQuestionUpdated, editingQuestion }) {
   const [questionText, setQuestionText] = useState("");
   const [answers, setAnswers] = useState([{ text: "", correct: false }]);
 
+  //edit questions
+  useEffect(() => {
+    if (editingQuestion) {
+      setQuestionText(editingQuestion.question);
+      setAnswers(editingQuestion.answers);
+    }
+  },[editingQuestion]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
 
     if (!questionText.trim()) {
       alert("Question text is required!");
       return;
     }
-  
+
     if (answers.some((answer) => !answer.text.trim())) {
       alert("All answer texts must be filled out!");
       return;
     }
-  
+    // send the question to the server
 
-    const newQuestion = { question: questionText, answers };
+    const questionData = { question: questionText, answers };
+
     try {
-      const response = await axios.post("http://localhost:3000/", newQuestion);
-      console.log("Server response:", response.data);
-      if (onQuestionAdded) {
+      if (editingQuestion) {
+        const response = await axios.put(
+          `
+        http://localhost:3000/${editingQuestion.id}`,
+          questionData
+        );
+        onQuestionUpdated(response.data);
+        alert("Question updated successfully!");
+      } else {
+        const response = await axios.post(
+          "http://localhost:3000/",
+          questionData
+        );
         onQuestionAdded(response.data);
+        alert("Question added successfully!");
       }
-      setQuestionText(""); 
-      setAnswers([{ text: "", correct: false }]); 
-      alert("Question added successfully!");
-    } catch (err) {
-      console.error("Error adding question:", err);
+      //clear the form
+      setQuestionText("");
+      setAnswers([{ text: "", correct: false }]);
+    } catch (error) {
+      console.error("Error adding question:", error);
     }
   };
-  
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -79,14 +98,15 @@ function QuestionForm({ onQuestionAdded }) {
         ))}
         <button
           type="button"
-          onClick={() =>
-            setAnswers([...answers, { text: "", correct: false }])
-          }
+          onClick={() => setAnswers([...answers, { text: "", correct: false }])}
         >
           Add Answer
         </button>
       </div>
       <button type="submit">Submit Question</button>
+
+      
+     
     </form>
   );
 }
