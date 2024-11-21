@@ -11,7 +11,7 @@ function QuestionPage() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/questions");
+        const response = await axios.get("http://localhost:3000/");
         setQuestions(response.data);
       } catch (error) {
         console.error("Error fetching questions:", error);
@@ -37,7 +37,7 @@ function QuestionPage() {
   // Handle deleting a question
   const handleQuestionDeleted = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/questions/${id}`);
+      await axios.delete(`http://localhost:3000/${id}`);
       setQuestions((prev) => prev.filter((q) => q._id !== id));
       alert("Question deleted successfully!");
     } catch (error) {
