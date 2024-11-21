@@ -1,31 +1,32 @@
 
-import { set } from "mongoose";
+
 import { useState, useEffect } from "react";
 
-const Time = ({ setTimeOut, questionNumber }) => {
+const Time = ({ setTimeOut, questionNumber, isAnswerCorrect }) => {
   const [time, setTime] = useState(30);
-  const [timerActive, setTimerActive] = useState(false);
-
 
   useEffect(() => {
-
     setTime(30); 
-    // setTimerActive(true);
-  }, [questionNumber]); 
-
+  }, [questionNumber]);
 
   useEffect(() => {
-    if (time === 0) {
-      setTimeOut(true); 
-      // setTimerActive(false);
+
+    if (isAnswerCorrect === false) {
+      setTimeOut(true);
       return;
     }
+
+    if (time === 0) {
+      setTimeOut(true); 
+      return;
+    }
+
     const interval = setInterval(() => {
-      setTime((prevTime) => prevTime - 1); // Decrease time every second
+      setTime((prevTime) => prevTime - 1); 
     }, 1000);
 
-    return () => clearInterval(interval); // Clear interval when component unmounts
-  }, [time, setTimeOut]);
+    return () => clearInterval(interval);  
+  }, [time, setTimeOut, isAnswerCorrect, questionNumber]);  
 
   return <div className="timer">{time}</div>;
 };

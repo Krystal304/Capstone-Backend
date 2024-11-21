@@ -1,5 +1,6 @@
 
 
+
 import { useState, useEffect, useRef } from "react";
 import correct from "../sounds/correct.mp3";
 import wrong from "../sounds/wrong.mp3";
@@ -8,13 +9,13 @@ import Time from "./Time";
 function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut, onCorrectAnswer }) {
   const [question, setQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [className, setClassName] = useState("answer");
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);  
 
   const correctAudioRef = useRef(new Audio(correct));
   const wrongAudioRef = useRef(new Audio(wrong));
 
   useEffect(() => {
-    setQuestion(data[questionNumber - 1]); 
+    setQuestion(data[questionNumber - 1]);
   }, [data, questionNumber]);
 
   const handleSubmit = (e) => {
@@ -22,6 +23,7 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut, onCorrectAn
     if (!selectedAnswer) return;
 
     const isCorrect = selectedAnswer.correct; 
+    setIsAnswerCorrect(isCorrect);
     setClassName(isCorrect ? "answer correct" : "answer wrong");
 
     setTimeout(() => {
@@ -63,6 +65,13 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut, onCorrectAn
       {selectedAnswer && (
         <div className="selected-answer">You selected: {selectedAnswer.text}</div>
       )}
+
+  
+      <Time 
+        setTimeOut={setTimeOut} 
+        questionNumber={questionNumber} 
+        isAnswerCorrect={isAnswerCorrect} 
+      />
     </div>
   );
 }
