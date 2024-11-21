@@ -30,7 +30,9 @@ function Home() {
             placeholder="Enter your name"
             style={{ padding: "10px", fontSize: "16px", marginRight: "10px" }}
           />
-          <button type="submit" style={{ padding: "10px 20px", fontSize: "16px" }}>
+          <button type="submit" style={{ padding: "10px 20px", fontSize: "16px" 
+            
+          }}>
             Start Trivia
           </button>
         </form>

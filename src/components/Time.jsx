@@ -32,3 +32,4 @@ const Time = ({ setTimeOut, questionNumber, isAnswerCorrect }) => {
 };
 
 export default Time;
+

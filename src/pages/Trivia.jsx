@@ -14,6 +14,7 @@ import { prizeMoney } from "../data/data";
 
 
 function Trivia({ userName }) {
+  console.log(userName);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [timeOut, setTimeOut] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -35,12 +36,26 @@ function Trivia({ userName }) {
     setCorrectAnswers((prev) => prev + 1);
   };
 
+// navigate to leaderboard at the end of the game
+useEffect(() => {
+  if (timeOut) {
+    // Save score in localStorage
+    const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+    leaderboard.push({ name: userName, score: correctAnswers });
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 
-  useEffect(() => {
-    if (timeOut) {
-      nav("/final", { state: { userName, correctAnswers } });
-    }
-  }, [timeOut, nav, userName, correctAnswers]);
+    // Navigate to the leaderboard page
+    nav("/leaderboard", { state: { userName, correctAnswers } });
+  }
+}, [timeOut, nav, userName, correctAnswers]);
+
+
+//replaced code with useEffect
+  // useEffect(() => {
+  //   if (timeOut) {
+  //     nav("/final", { state: { userName, correctAnswers } });
+  //   }
+  // }, [timeOut, nav, userName, correctAnswers]);
   
 
 

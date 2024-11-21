@@ -2,16 +2,26 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
+import { useLocation } from "react-router-dom";
 
 function Leaderboard() {
+  const location = useLocation();
+  const { userName, correctAnswers } = location.state || {};
   const [scores, setScores] = useState([]);
   const nav = useNavigate();
 
+
+// retrieve leaderboard in local storage
   useEffect(() => {
     const storedScores = JSON.parse(localStorage.getItem("leaderboard")) || [];
     console.log("Retrieved scores:", storedScores);
     setScores(storedScores);
   }, []);
+// navigate to leaderboard
+  useEffect(() => {
+    console.log("User:", userName);
+    console.log("Score:", correctAnswers);
+  }, [userName, correctAnswers]);
 
   const sortedScores = [...scores].sort((a, b) => b.score - a.score);
   const pageSize = 10;

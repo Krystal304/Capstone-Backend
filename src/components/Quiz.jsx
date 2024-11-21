@@ -19,6 +19,8 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut, onCorrectAn
     setQuestion(data[questionNumber - 1]);
   }, [data, questionNumber]);
 
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!selectedAnswer) return;
