@@ -16,7 +16,7 @@ function Home() {
   };
 
   return (
-    <div style={{ textAlign: "center", padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <div style={{backgroundColor: "purple", textAlign: "center", padding: "20px", fontFamily: "Arial, sans-serif" }}>
       <h1>Welcome to the Trivia Game!</h1>
       <p>Test your knowledge by answering fun trivia questions. Let's get started!</p>
 
