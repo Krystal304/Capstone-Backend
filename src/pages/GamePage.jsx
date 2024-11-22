@@ -1,39 +1,49 @@
-// import React from 'react'
-// import Money from '../components/Money'
-// import Quiz from '../components/Quiz'
 
-// function GamePage({correctAnswers, questions, questionNumber,setQuestionNumber, setTimeOut, handleCorrectAnswer }) {
-//   return (
-//     <div className="game-container">
-//     <Money correctAnswers={correctAnswers} /> 
+// import React, { useState } from "react";
+// import Money from "../components/Money";
+// import Quiz from "../components/Quiz";
+// import { useNavigate } from "react-router-dom";
+// import axios from 'axios'; 
 
-//     <div className="quiz-container"> 
-     
-//       <Quiz
-//         data={questions}
-//         questionNumber={questionNumber}
-//         setQuestionNumber={setQuestionNumber}
-//         setTimeOut={setTimeOut}
-//         onCorrectAnswer={handleCorrectAnswer}
-//       />
-//     </div>
-//   </div>
-//   )
-// }
-
-// export default GamePage
-
-// import React from 'react';
-// import Money from '../components/Money';
-// import Quiz from '../components/Quiz';
-// import { useState } from 'react'; 
-
-// function GamePage({ correctAnswers, questions, questionNumber, setQuestionNumber, setTimeOut, handleCorrectAnswer }) {
+// function GamePage({
+//   correctAnswers,
+//   questions,
+//   questionNumber,
+//   setQuestionNumber,
+//   setTimeOut,
+//   handleCorrectAnswer,
+//   userName,
+// }) {
 //   const [isGameOver, setIsGameOver] = useState(false);
-
+//   const [lifelines, setLifelines] = useState({ delete: 3 }); 
+//   const navigate = useNavigate();
 
 //   const endGame = () => {
 //     setIsGameOver(true);
+//   };
+
+//   const useDeleteLifeline = async () => {
+//     if (lifelines.delete > 0) {
+//       try {
+        
+//         setLifelines((prev) => ({ ...prev, delete: prev.delete - 1 }));
+
+ 
+//         const currentQuestion = questions[questionNumber - 1];
+//         console.log("Deleting question with ID:", currentQuestion._id); 
+        
+     
+//         await axios.delete(`http://localhost:3000/questions/${currentQuestion._id}`);
+
+      
+//         setQuestionNumber((prev) => prev + 1);
+//       } catch (error) {
+//         console.error("Error deleting the question:", error);
+//         alert("Failed to delete the question. Please try again.");
+//       }
+//     } else {
+//       alert("No delete lifelines left!");
+//     }
 //   };
 
 //   return (
@@ -41,7 +51,6 @@
 //       {!isGameOver ? (
 //         <>
 //           <Money correctAnswers={correctAnswers} />
-
 //           <div className="quiz-container">
 //             <Quiz
 //               data={questions}
@@ -52,6 +61,8 @@
 //                 endGame();
 //               }}
 //               onCorrectAnswer={handleCorrectAnswer}
+//               lifelines={lifelines}
+//               useDeleteLifeline={useDeleteLifeline} 
 //             />
 //           </div>
 //         </>
@@ -60,7 +71,7 @@
 //           <h1>Game Over</h1>
 //           <button
 //             onClick={() => {
-//               window.location.href = '/leaderboard'; // Redirect to leaderboard
+//               navigate("/leaderboard", { state: { userName, correctAnswers } });
 //             }}
 //           >
 //             View Leaderboard
@@ -73,17 +84,46 @@
 
 // export default GamePage;
 
+
 import React, { useState } from "react";
 import Money from "../components/Money";
 import Quiz from "../components/Quiz";
 import { useNavigate } from "react-router-dom";
 
-function GamePage({ correctAnswers, questions, questionNumber, setQuestionNumber, setTimeOut, handleCorrectAnswer, userName }) {
+function GamePage({
+  correctAnswers,
+  questions,
+  questionNumber,
+  setQuestionNumber,
+  setTimeOut,
+  handleCorrectAnswer,
+  userName,
+}) {
   const [isGameOver, setIsGameOver] = useState(false);
+  const [lifelines, setLifelines] = useState({ delete: 3 }); // Track remaining delete lifelines
+  const [currentQuestions, setCurrentQuestions] = useState(questions); // A local state for the list of questions
   const navigate = useNavigate();
 
   const endGame = () => {
     setIsGameOver(true);
+  };
+
+  const useDeleteLifeline = () => {
+    if (lifelines.delete > 0) {
+      // Decrease the remaining delete lifelines
+      setLifelines((prev) => ({ ...prev, delete: prev.delete - 1 }));
+
+      // Remove the current question from the list (based on questionNumber)
+      const newQuestions = currentQuestions.filter((_, index) => index !== questionNumber - 1);
+
+      // Update the questions state to reflect the removal
+      setCurrentQuestions(newQuestions);
+
+      // Move to the next question
+      setQuestionNumber((prev) => prev + 1);
+    } else {
+      alert("No delete lifelines left!");
+    }
   };
 
   return (
@@ -93,7 +133,7 @@ function GamePage({ correctAnswers, questions, questionNumber, setQuestionNumber
           <Money correctAnswers={correctAnswers} />
           <div className="quiz-container">
             <Quiz
-              data={questions}
+              data={currentQuestions} // Pass the updated questions list to Quiz
               questionNumber={questionNumber}
               setQuestionNumber={setQuestionNumber}
               setTimeOut={() => {
@@ -101,7 +141,13 @@ function GamePage({ correctAnswers, questions, questionNumber, setQuestionNumber
                 endGame();
               }}
               onCorrectAnswer={handleCorrectAnswer}
+              lifelines={lifelines}
+              useDeleteLifeline={useDeleteLifeline} // Pass the lifeline function to Quiz
             />
+            {/* Button to use the delete lifeline */}
+            <button onClick={useDeleteLifeline} disabled={lifelines.delete <= 0}>
+              {lifelines.delete > 0 ? `Delete Question (${lifelines.delete} left)` : "No Lifelines Left"}
+            </button>
           </div>
         </>
       ) : (
@@ -109,8 +155,7 @@ function GamePage({ correctAnswers, questions, questionNumber, setQuestionNumber
           <h1>Game Over</h1>
           <button
             onClick={() => {
-              // Passing username and correctAnswers to Leaderboard
-              navigate('/leaderboard', { state: { userName, correctAnswers } });
+              navigate("/leaderboard", { state: { userName, correctAnswers } });
             }}
           >
             View Leaderboard
@@ -122,4 +167,7 @@ function GamePage({ correctAnswers, questions, questionNumber, setQuestionNumber
 }
 
 export default GamePage;
+
+
+
 

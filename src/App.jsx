@@ -11,6 +11,7 @@ import Final from "./pages/Final";
 import GamePage from "./pages/GamePage";
 import QuestionForm from "./components/QuestionForm";
 import "./App.css";
+import QuestionList from "./pages/QuestionList";
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
       <header className="header">
         <div className="nav-links">
         <Link to="/">Home</Link>
+        <Link to="/questionlist">Question List</Link>
           <Link to="/trivia">Trivia</Link>
           <Link to="/leaderboard">Leaderboard</Link>
           <Link to="/add-question">Add Question</Link>
@@ -65,9 +67,11 @@ function App() {
               setTimeOut={setTimeOut}
               handleCorrectAnswer={handleCorrectAnswer}
               correctAnswers={correctAnswers}
+              
             />
           }
         />
+        <Route path="/questionlist" element={<QuestionList questions={questions}/>} />
          <Route
           path="/trivia"
           element={<Trivia questions={questions} />} 

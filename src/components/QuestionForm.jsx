@@ -5,7 +5,7 @@ function QuestionForm({ onQuestionAdded, onQuestionUpdated, editingQuestion }) {
   const [questionText, setQuestionText] = useState("");
   const [answers, setAnswers] = useState([{ text: "", correct: false }]);
 
-  //edit questions
+
   useEffect(() => {
     if (editingQuestion) {
       setQuestionText(editingQuestion.question);
@@ -25,7 +25,7 @@ function QuestionForm({ onQuestionAdded, onQuestionUpdated, editingQuestion }) {
       alert("All answer texts must be filled out!");
       return;
     }
-    // send the question to the server
+
 
     const questionData = { question: questionText, answers };
 
@@ -46,7 +46,7 @@ function QuestionForm({ onQuestionAdded, onQuestionUpdated, editingQuestion }) {
         onQuestionAdded(response.data);
         alert("Question added successfully!");
       }
-      //clear the form
+
       setQuestionText("");
       setAnswers([{ text: "", correct: false }]);
     } catch (error) {

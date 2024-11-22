@@ -1,46 +1,42 @@
 
 
 
-import { useState, useEffect, useRef } from "react";
-import correct from "../sounds/correct.mp3";
-import wrong from "../sounds/wrong.mp3";
-import Time from "./Time";
 
-function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut, onCorrectAnswer }) {
+import { useState, useEffect } from "react";
+
+function Quiz({
+  data,
+  questionNumber,
+  setQuestionNumber,
+  setTimeOut,
+  onCorrectAnswer,
+  lifelines,
+  useDeleteLifeline,  
+}) {
   const [question, setQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);  
-  const [className, setClassName] = useState("answer");
-
-  const correctAudioRef = useRef(new Audio(correct));
-  const wrongAudioRef = useRef(new Audio(wrong));
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
 
   useEffect(() => {
     setQuestion(data[questionNumber - 1]);
   }, [data, questionNumber]);
 
-  
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!selectedAnswer) return;
 
-    const isCorrect = selectedAnswer.correct; 
+    const isCorrect = selectedAnswer.correct;
     setIsAnswerCorrect(isCorrect);
-    setClassName(isCorrect ? "answer correct" : "answer wrong");
 
     setTimeout(() => {
       if (isCorrect) {
-        correctAudioRef.current.play();  
-        onCorrectAnswer();  
-        setQuestionNumber((prev) => prev + 1);  
+        onCorrectAnswer();
+        setQuestionNumber((prev) => prev + 1);
       } else {
-        wrongAudioRef.current.play();  
-        setTimeOut(true);  
+        setTimeOut(true);
       }
-      setSelectedAnswer(null); 
-      setClassName("answer");  
-    }, 2000); 
+      setSelectedAnswer(null);
+    }, 2000);
   };
 
   return (
@@ -49,13 +45,13 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut, onCorrectAn
 
       <form className="answers">
         {question?.answers.map((item) => (
-          <label key={item._id} className={`answer ${className}`}>
+          <label key={item._id} className="answer">
             <input
               type="radio"
               name="answer"
               value={item.text}
-              onChange={() => setSelectedAnswer(item)} 
-              checked={selectedAnswer?.text === item.text}  
+              onChange={() => setSelectedAnswer(item)}
+              checked={selectedAnswer?.text === item.text}
             />
             {item.text}
           </label>
@@ -69,14 +65,12 @@ function Quiz({ data, questionNumber, setQuestionNumber, setTimeOut, onCorrectAn
         <div className="selected-answer">You selected: {selectedAnswer.text}</div>
       )}
 
-  
-      <Time 
-        setTimeOut={setTimeOut} 
-        questionNumber={questionNumber} 
-        isAnswerCorrect={isAnswerCorrect} 
-      />
+      <div className="lifeline-container">
+      
+      </div>
     </div>
   );
 }
 
 export default Quiz;
+

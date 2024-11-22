@@ -7,7 +7,6 @@ function QuestionPage() {
   const [questions, setQuestions] = useState([]);
   const [editingQuestion, setEditingQuestion] = useState(null);
 
-
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -21,7 +20,6 @@ function QuestionPage() {
     fetchQuestions();
   }, []);
 
-
   const handleQuestionAdded = (newQuestion) => {
     setQuestions((prev) => [...prev, newQuestion]);
   };
@@ -30,10 +28,9 @@ function QuestionPage() {
     setQuestions((prev) =>
       prev.map((q) => (q._id === updatedQuestion._id ? updatedQuestion : q))
     );
-    setEditingQuestion(null); // Clear editing state
+    setEditingQuestion(null);
   };
 
-  // Handle deleting a question
   const handleQuestionDeleted = async (id) => {
     try {
       await axios.delete(`http://localhost:3000/${id}`);
@@ -44,10 +41,9 @@ function QuestionPage() {
     }
   };
 
-  //  Pass editingQuestion to QuestionForm
   const handleEdit = (question) => {
     setEditingQuestion(question);
-  }
+  };
 
   return (
     <div>
@@ -59,15 +55,20 @@ function QuestionPage() {
       />
       <QuestionList
         questions={questions}
-        onEdit={setEditingQuestion} 
-        onDelete={handleQuestionDeleted} 
+        onEdit={setEditingQuestion}
+        onDelete={handleQuestionDeleted}
       />
-
       // Pass editingQuestion to QuestionForm
       <QuestionForm
         onQuestionAdded={handleQuestionAdded}
         onQuestionUpdated={handleQuestionUpdated}
-        editingQuestion={editingQuestion} 
+        editingQuestion={editingQuestion}
+      />
+      <QuestionList
+        questions={questions}
+        setQuestions={setQuestions} 
+        onEdit={setEditingQuestion}
+        onDelete={handleQuestionDeleted}
       />
     </div>
   );
