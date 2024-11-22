@@ -11,7 +11,7 @@ import Final from "./pages/Final";
 import GamePage from "./pages/GamePage";
 import QuestionForm from "./components/QuestionForm";
 import "./App.css";
-import QuestionList from "./pages/QuestionList";
+import QuestionPage from "./pages/QuestionPage";
 
 
 function App() {
@@ -71,7 +71,7 @@ function App() {
             />
           }
         />
-        <Route path="/questionlist" element={<QuestionList questions={questions}/>} />
+        <Route path="/questionlist" element={<QuestionPage setQuestions={setQuestions} questions={questions}/>} />
          <Route
           path="/trivia"
           element={<Trivia questions={questions} />} 

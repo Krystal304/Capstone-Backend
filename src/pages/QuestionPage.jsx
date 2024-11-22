@@ -1,24 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import QuestionForm from "./QuestionForm";
-import QuestionList from "./QuestionList";
+import QuestionForm from '../components/QuestionForm'
+import QuestionList from '../pages/QuestionList'
 
-function QuestionPage() {
-  const [questions, setQuestions] = useState([]);
+function QuestionPage({questions, setQuestions}) {
+ 
   const [editingQuestion, setEditingQuestion] = useState(null);
-
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/");
-        setQuestions(response.data);
-      } catch (error) {
-        console.error("Error fetching questions:", error);
-      }
-    };
-
-    fetchQuestions();
-  }, []);
 
   const handleQuestionAdded = (newQuestion) => {
     setQuestions((prev) => [...prev, newQuestion]);
@@ -31,15 +18,7 @@ function QuestionPage() {
     setEditingQuestion(null);
   };
 
-  const handleQuestionDeleted = async (id) => {
-    try {
-      await axios.delete(`http://localhost:3000/${id}`);
-      setQuestions((prev) => prev.filter((q) => q._id !== id));
-      alert("Question deleted successfully!");
-    } catch (error) {
-      console.error("Error deleting question:", error);
-    }
-  };
+
 
   const handleEdit = (question) => {
     setEditingQuestion(question);
@@ -48,30 +27,21 @@ function QuestionPage() {
   return (
     <div>
       <h1>Manage Questions</h1>
-      <QuestionForm
-        onQuestionAdded={handleQuestionAdded}
-        onQuestionUpdated={handleQuestionUpdated}
-        editingQuestion={editingQuestion}
-      />
-      <QuestionList
-        questions={questions}
-        onEdit={setEditingQuestion}
-        onDelete={handleQuestionDeleted}
-      />
-      // Pass editingQuestion to QuestionForm
-      <QuestionForm
-        onQuestionAdded={handleQuestionAdded}
-        onQuestionUpdated={handleQuestionUpdated}
-        editingQuestion={editingQuestion}
-      />
+      <QuestionForm onQuestionAdded={handleQuestionAdded} onQuestionUpdated={handleQuestionUpdated} editingQuestion={editingQuestion} />
+     
+     
       <QuestionList
         questions={questions}
         setQuestions={setQuestions} 
         onEdit={setEditingQuestion}
-        onDelete={handleQuestionDeleted}
+  
       />
     </div>
   );
 }
 
+
+
 export default QuestionPage;
+
+
