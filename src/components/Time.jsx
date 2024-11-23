@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 
 const Time = ({ setTimeOut, questionNumber, isAnswerCorrect }) => {
+  
   const [time, setTime] = useState(30);
 
   useEffect(() => {
@@ -32,4 +33,7 @@ const Time = ({ setTimeOut, questionNumber, isAnswerCorrect }) => {
 };
 
 export default Time;
+
+
+
 

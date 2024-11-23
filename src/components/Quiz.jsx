@@ -1,7 +1,4 @@
 
-
-
-
 import { useState, useEffect } from "react";
 
 function Quiz({
@@ -12,6 +9,8 @@ function Quiz({
   onCorrectAnswer,
   lifelines,
   useDeleteLifeline,  
+  countdown,
+  setCountdown
 }) {
   const [question, setQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -32,6 +31,7 @@ function Quiz({
       if (isCorrect) {
         onCorrectAnswer();
         setQuestionNumber((prev) => prev + 1);
+        setCountdown(20);
       } else {
         setTimeOut(true);
       }

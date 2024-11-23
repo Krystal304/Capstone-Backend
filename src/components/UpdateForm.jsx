@@ -8,10 +8,6 @@ function UpdateQuestionForm() {
   const { id } = useParams(); 
   const [formData, setFormData] = useState(null);
 
-  
-
-
-
   useEffect(() => {
     async function fetchQuestion() {
       try {

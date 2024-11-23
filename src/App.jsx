@@ -12,7 +12,7 @@ import GamePage from "./pages/GamePage";
 import QuestionForm from "./components/QuestionForm";
 import "./App.css";
 import QuestionPage from "./pages/QuestionPage";
-import UpdateQuestionForm from "./components/UpdateForm";
+
 import EditQuestionPage from "./pages/EditQuestionPage";
 
 
@@ -43,7 +43,7 @@ function App() {
   }, []);
 
   const handleCorrectAnswer = () => {
-    setCorrectAnswers(correctAnswers + 1);
+    setCorrectAnswers(correctAnswers + 1); // correct answer is score
   };
 
   return (
@@ -53,7 +53,7 @@ function App() {
         <div className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/questionlist">Question List</Link>
-          <Link to="/trivia">Trivia</Link>
+          {/* <Link to="/trivia">Trivia</Link> */}
           <Link to="/leaderboard">Leaderboard</Link>
           <Link to="/add-question">Add Question</Link>
         </div>
@@ -70,6 +70,8 @@ function App() {
               setTimeOut={setTimeOut}
               handleCorrectAnswer={handleCorrectAnswer}
               correctAnswers={correctAnswers}
+              setCorrectAnswers={setCorrectAnswers}
+              
               
             />
           }
@@ -78,10 +80,10 @@ function App() {
         {/* <Route path="/edit/:id" element={<UpdateQuestionForm />} /> */}
         <Route path="/edit/:id" element={<EditQuestionPage />} />
        
-         <Route
+         {/* <Route
           path="/trivia"
           element={<Trivia questions={questions} />} 
-        />
+        /> */}
         <Route
           path="/add-question"
           element={<QuestionForm onQuestionAdded={handleQuestionAdded} />} 
@@ -95,7 +97,7 @@ function App() {
         <Route
           path="/"
           element={
-            <Home questions={questions} onQuestionAdded={handleQuestionAdded} />
+            <Home setCorrectAnswers={setCorrectAnswers} questions={questions} onQuestionAdded={handleQuestionAdded} />
           }
         />
       </Routes>

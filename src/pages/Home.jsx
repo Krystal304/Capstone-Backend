@@ -2,14 +2,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Home() {
-  const [username, setUsername] = useState("");
+function Home({ setCorrectAnswers }) {
+  const [userName, setUsername] = useState("");
   const navigate = useNavigate();
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    if (username.trim()) {
-      navigate("/trivia", { state: { username } });
+    setCorrectAnswers(0);
+    if (userName.trim()) {
+      navigate("/trivia", { state: { userName  } });
     } else {
       alert("Please enter a name to continue.");
     }
@@ -25,7 +26,7 @@ function Home() {
         <form onSubmit={handleSignIn}>
           <input
             type="text"
-            value={username}
+            value={userName}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter your name"
             style={{ padding: "10px", fontSize: "16px", marginRight: "10px" }}

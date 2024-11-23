@@ -3,16 +3,17 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 function EditQuestionPage() {
-  const { id } = useParams(); // Get the question ID from the URL
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const [questionText, setQuestionText] = useState("");
 
   useEffect(() => {
-    // Fetch the existing question data
+  
     const fetchQuestion = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/${id}`);
-        setQuestionText(response.data.question); // Assuming the API response has a "question" field
+        setQuestionText(response.data.question); 
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching question:", error);
       }
@@ -25,7 +26,7 @@ function EditQuestionPage() {
     try {
       await axios.put(`http://localhost:3000/${id}`, { question: questionText });
       alert("Question updated successfully!");
-      navigate("/"); // Redirect back to the main list page
+      navigate("/");
     } catch (error) {
       console.error("Error updating question:", error);
     }

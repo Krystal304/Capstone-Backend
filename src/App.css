@@ -17,7 +17,7 @@ Reset and Global Styles * {
 body {
   font-family: "Roboto", sans-serif;
 
-  color: white;
+  color: red;
   overflow-x: hidden;
   background: url("./images/bg.jpg");
 }
@@ -389,3 +389,4 @@ button:hover {
 .leaderboard button:hover {
   background-color: #0056b3;
 }
+

@@ -8,6 +8,7 @@ function Leaderboard() {
   const location = useLocation();
   const { userName, correctAnswers } = location.state || {};
   const [scores, setScores] = useState([]);
+ 
   const navigate = useNavigate();
 
 
@@ -20,7 +21,7 @@ function Leaderboard() {
 
   
       const storedScores = JSON.parse(localStorage.getItem("leaderboard")) || [];
-      
+      console.log(JSON.parse(localStorage.getItem("leaderboard")))
       
       const updatedScores = [...storedScores, newScore]
         .sort((a, b) => b.score - a.score)
@@ -51,6 +52,7 @@ function Leaderboard() {
 
   return (
     <div className="leaderboard">
+    { console.log(paginatedScores)}
       <h1>Leaderboard</h1>
       <table>
         <thead>
