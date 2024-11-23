@@ -13,6 +13,7 @@ import QuestionForm from "./components/QuestionForm";
 import "./App.css";
 import QuestionPage from "./pages/QuestionPage";
 import UpdateQuestionForm from "./components/UpdateForm";
+import EditQuestionPage from "./pages/EditQuestionPage";
 
 
 
@@ -74,7 +75,8 @@ function App() {
           }
         />
         <Route path="/questionlist" element={<QuestionPage setQuestions={setQuestions} questions={questions}/>} />
-        <Route path="/edit/:id" element={<UpdateQuestionForm />} />
+        {/* <Route path="/edit/:id" element={<UpdateQuestionForm />} /> */}
+        <Route path="/edit/:id" element={<EditQuestionPage />} />
        
          <Route
           path="/trivia"

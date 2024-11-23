@@ -40,3 +40,4 @@ export const deleteQuestion = async (id) => {
     console.error("Error deleting question", error);
   }
 };
+export default { fetchQuestions, createQuestion, updateQuestion, deleteQuestion };
