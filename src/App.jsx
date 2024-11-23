@@ -12,6 +12,8 @@ import GamePage from "./pages/GamePage";
 import QuestionForm from "./components/QuestionForm";
 import "./App.css";
 import QuestionPage from "./pages/QuestionPage";
+import UpdateQuestionForm from "./components/UpdateForm";
+
 
 
 function App() {
@@ -72,6 +74,8 @@ function App() {
           }
         />
         <Route path="/questionlist" element={<QuestionPage setQuestions={setQuestions} questions={questions}/>} />
+        <Route path="/edit/:id" element={<UpdateQuestionForm />} />
+       
          <Route
           path="/trivia"
           element={<Trivia questions={questions} />} 
