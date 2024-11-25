@@ -27,7 +27,7 @@ function GamePage({
   useEffect(() => {
     if (countdown == 0) {
       setIsGameOver(true);
-      // setCorrectAnswers(0);
+
       setLifelines({ delete: 3 });
     }
     const timerInterval = setInterval(() => {
@@ -46,7 +46,7 @@ function GamePage({
   }, [countdown]);
   const endGame = () => {
     setIsGameOver(true);
-    // setCorrectAnswers(0);
+
     setLifelines({ delete: 3 });
 
   };
