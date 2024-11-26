@@ -56,7 +56,7 @@ function App() {
           {/* <Link to="/trivia">Trivia</Link> */}
           <Link to="/leaderboard">Leaderboard</Link>
           {/* <Link to="/add-question">Add Question</Link> */}
-          <Link to="/Final">Final Results</Link>
+          <Link to="/Final">Final</Link>
 
         </div>
       </header>
